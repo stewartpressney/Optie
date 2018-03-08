@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Optie</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../styles/layout.css"></li>
+
+  <body>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#" class="brand-logo left">OPTIE</a>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h1>Create an Events</h1>
+      <form method="POST" action="/create">
+          <!-- Row 1 -->
+          <div class="row">
+
+            <div class="input-field col s6">
+              <input id="user_name" type="text" class="validate">
+              <label for="user_name">Full Name:</label>
+            </div>
+
+            <div class="input-field col s6">
+              <input id="user_email" type="email" class="validate">
+              <label for="user_email">Email:</label>
+            </div>
+
+          </div>
+          <!-- Row 2 - 4 -->
+          <div class="row">
+              <div class="input-field col s12">
+                <input id="event_title" type="text" class="validate">
+                <label for="event_title">Event Title:</label>
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="input-field col s12">
+                <input id="event_meeting" type="text" class="validate">
+                <label for="event_meeting">Meeting Point:</label>
+              </div>
+          </div>
+
+          <div class="row">
+              <div class="input-field col s12">
+                <textarea id="event_description" class="materialize-textarea"></textarea>
+                <label for="event_description">Description:</label>
+              </div>
+          </div>
+          <!-- Row 5 - 7 -->
+          <div class="row">
+            <div class="input-field col s4">
+              <label for="date">Event Date</label>
+              <input type="text" class="datepicker">
+            </div>
+            <div class="input-field col s4">
+              <label for="start">Start Time</label>
+              <input type="text" class="timepicker">
+            </div>
+            <div class="input-field col s4">
+              <label for="end">End Time</label>
+              <input type="text" class="timepicker">
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s4">
+              <label for="date">Event Date</label>
+              <input type="text" class="datepicker">
+            </div>
+            <div class="input-field col s4">
+              <label for="start">Start Time</label>
+              <input type="text" class="timepicker">
+            </div>
+            <div class="input-field col s4">
+              <label for="end">End Time</label>
+              <input type="text" class="timepicker">
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s4">
+              <label for="date">Event Date</label>
+              <input type="text" class="datepicker">
+            </div>
+            <div class="input-field col s4">
+              <label for="start">Start Time</label>
+              <input type="text" class="timepicker">
+            </div>
+            <div class="input-field col s4">
+              <label for="end">End Time</label>
+              <input type="text" class="timepicker">
+            </div>
+          </div>
+
+          </form>
+          <a href="file:///Users/Stewart/lighthouse/optie/public/views/event.html" id="create" class="waves-effect waves-light btn right">Create Event</a>
+        </div>
+    </body>
+    <script type="text/javascript">
+    $('.timepicker').pickatime({
+      default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+      fromnow: 0, // set default time to * milliseconds from now (using with default = 'now')
+      twelvehour: true, // Use AM/PM or 24-hour format
+      donetext: 'OK', // text for done-button
+      cleartext: 'Clear', // text for clear-button
+      canceltext: 'Cancel', // Text for cancel-button
+      autoclose: false, // automatic close timepicker
+      ampmclickable: true, // make AM PM clickable
+      aftershow: function() {} //Function for after opening timepicker
+    });
+
+    $('.datepicker').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15, // Creates a dropdown of 15 years to control year,
+      today: 'Today',
+      clear: 'Clear',
+      close: 'Ok',
+      closeOnSelect: true // Close upon selecting a date,
+    });
+
+    </script>
+  </body>
+</html>
