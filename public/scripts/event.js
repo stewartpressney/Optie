@@ -8,5 +8,5 @@ $(() => {
   //     $("<div>").text(user.name).appendTo($("body"));
   //   }
   // });
-  console.log("APP YEAH");
+  console.log("EVENT YEAH");
 });

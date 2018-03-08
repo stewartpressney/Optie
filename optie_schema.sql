@@ -31,7 +31,5 @@ CREATE TABLE slots(
   avalible BOOLEAN NOT NULL);
 
 
-INSERT INTO users (user_name, user_email)
-VALUES ('John Smith', 'john@john.john');
-VALUES ('Sally Doe', 'sally@smith.john');
+
 
