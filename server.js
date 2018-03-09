@@ -38,16 +38,70 @@ app.use(express.static("public"));
 app.set('views', path.join(__dirname, '/public/views'));
 
 
-// Mount all resource routes (prefix)
-// all the routes inside routes/event.js starts from "/event" as root(/)
-app.use("/event", eventRoutes(knex));
+
+// Generate URL
+function generateURL() {
+  var text = "";
+  var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (var i = 0; i < 6; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+}
 
 // Home page
 app.get("/", (req, res) => {
+  console.log("here in home page")
   res.render("event");
 });
 
 
+//Mount all resource routes (prefix)
+app.use("/event", eventRoutes(knex));
+
+// url
+// app.get("/events/:url", (req, res) => {
+
+//   const eventName = knex.select('event_title')
+//     .from('events')
+//     .where('event_url', req.params.url)
+//     .then(function(data){
+//       console.log(data)
+//       res.render("event_detail");
+//     });
+  
+  
+  
+// });
+
+//create event
+app.post('/create', (req, res) =>{
+
+  const userCreation = knex('users').insert({user_name: req.body.user_name, user_email:req.body.user_email});
+  userCreation.returning('id')
+  .asCallback((err, [id]) => {
+    console.log(id)
+
+    if(err) {
+      console.log(err);
+      // handle error and return
+      return
+    }
+
+
+    const newURL = generateURL()
+    const eventCreation = knex('events').insert({event_title: req.body.event_title, event_description: req.body.event_description, event_meeting: req.body.event_meeting, event_url: newURL, user_id:id})
+    eventCreation.returning('id')
+    .asCallback((err, id) => {
+      // handle errorrsrs
+      console.log(err, id);
+      //res.render("event_detail")
+      res.redirect("/events/" + newURL);
+    });
+
+    
+  });
+})
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

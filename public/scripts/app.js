@@ -27,7 +27,7 @@ $(() => {
     event.preventDefault();
     var data = $('#createEvent').serialize();
     console.log(data);
-    $.post('/event', data).done(function (response) {
+    $.post('/create', data).done(function (response) {
       console.log(response);
       //redirect to created event page
 

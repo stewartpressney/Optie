@@ -22,7 +22,20 @@ module.exports = (knex) => {
         console.log(id);
         res.status(200).send('Done!');
       });
- 
+
+  });
+
+  // /event/:url
+  router.get("/:url", (req, res) => {
+
+    const eventName = knex.select('event_title')
+      .from('events')
+      .where('event_url', req.params.url)
+      .then(function (data) {
+        console.log(data)
+        res.render("event_detail");
+      });
+
   });
 
   // app.post('/event/:id')
