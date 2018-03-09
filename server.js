@@ -2,18 +2,18 @@
 
 require('dotenv').config();
 
-const PORT        = process.env.PORT || 8080;
-const ENV         = process.env.ENV || "development";
-const express     = require("express");
-const bodyParser  = require("body-parser");
-const sass        = require("node-sass-middleware");
-const path        = require('path');
-const app         = express();
+const PORT = process.env.PORT || 8080;
+const ENV = process.env.ENV || "development";
+const express = require("express");
+const bodyParser = require("body-parser");
+const sass = require("node-sass-middleware");
+const path = require('path');
+const app = express();
 
-const knexConfig  = require("./knexfile");
-const knex        = require("knex")(knexConfig[ENV]);
-const morgan      = require('morgan');
-const knexLogger  = require('knex-logger');
+const knexConfig = require("./knexfile");
+const knex = require("knex")(knexConfig[ENV]);
+const morgan = require('morgan');
+const knexLogger = require('knex-logger');
 
 // Seperated Routes for each Resource
 const usersRoutes = require("./routes/users");
@@ -39,21 +39,114 @@ app.use(express.static("public"));
 app.set('views', path.join(__dirname, '/public/views'));
 
 
-// Mount all resource routes (prefix)
-app.use("/api/users", usersRoutes(knex));
-app.use("/event", eventRoutes(knex));
-
 // Home page
 app.get("/", (req, res) => {
+  console.log("here in home page")
   res.render("event");
 });
 
+//Mount all resource routes (prefix)
+app.use("/api/users", usersRoutes(knex));
+app.use("/event", eventRoutes(knex));
+
+
+
+
 //create event
-app.post('/create', (req, res) =>{
-  console.log(req.body)
-  res.render("event_detail");
-})
+app.post('/create', async(req, res) => {
+  try {
+    console.dir(req.body, { colors: true })
+
+    let user_id;
+
+    const [user] = await knex('users').where(req.body.user).select('id');
+
+
+
+    if (!user) {
+      // User with these doesn't exist
+      const [new_user] = await knex('users').insert(req.body.user).returning('id');
+      user_id = new_user.id;
+    } else {
+      user_id = user.id;
+    }
+
+    // const event = req.body.event;
+    // event.user_id = user_id;
+
+    const event_url = new Date().getTime().toString(32);
+
+    const new_event = { ...req.body.event, user_id, event_url };
+
+    const [event_id] = await knex('events').insert(new_event).returning('id');
+
+
+    await knex('slots').insert(req.body.suggestions.map(suggestion => ({ ...suggestion, event_id })));
+
+    // Object.assign({}, suggestion, { event_id }) - the ... bit above
+
+
+    res.redirect('/events/' + event_url);
+  } catch (ex) {
+    res.json({ error: ex.message });
+  }
+});
+
+
+
+
+
+
+app.get('/events/:id', async(req, res) => {
+
+  const where = { event_url: req.params.id };
+
+  const [event] = await knex('events').where(where).select('*');
+  const slots = await knex('slots').where({ event_id: event.id }).select('*');
+  const [user] = await knex('users').where({ id: event.user_id }).select('*');
+
+  res.render("event_detail", { event, slots, user });
+});
+
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
+
+
+// find the user from req.body.user deriving user_id
+
+// HAHAHA, yp yours, jeremy!Vasili
+
+
+// knex.table('users').where(req.body.user).then(user => {
+//   knex.table('event').insert().then(event_id => {
+
+
+//   }
+// })
+
+// create the event from req.body.event deriving event_id
+
+// create slots using req.body.suggestions + event_id
+
+// redirect to
+
+
+
+// let slots = [];
+// let slot = {date: '', start: '', end: ''}
+// let suggestions = req.body.suggestions;
+
+
+// for (var i in data.date) {
+//   let slot = {
+//     date: req.body.date[i],
+//     start: req.body.start[i],
+//     end: req.body.end[i],
+//   };
+//   slots.push(slot);
+// console.log(slots)
+// };
+
+//res.render("event_detail");
