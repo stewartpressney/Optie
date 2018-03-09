@@ -7,6 +7,7 @@ const ENV         = process.env.ENV || "development";
 const express     = require("express");
 const bodyParser  = require("body-parser");
 const sass        = require("node-sass-middleware");
+const path        = require('path');
 const app         = express();
 
 const knexConfig  = require("./knexfile");
@@ -35,6 +36,8 @@ app.use("/styles", sass({
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
+app.set('views', path.join(__dirname, '/public/views'));
+
 
 // Mount all resource routes (prefix)
 app.use("/api/users", usersRoutes(knex));
@@ -42,8 +45,14 @@ app.use("/event", eventRoutes(knex));
 
 // Home page
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("event");
 });
+
+//create event
+app.post('/create', (req, res) =>{
+  console.log(req.body)
+  res.render("event_detail");
+})
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);

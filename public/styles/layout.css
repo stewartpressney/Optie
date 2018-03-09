@@ -16,6 +16,27 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 100;
+}
+
+.picker__date-display{
+  background-color: #295269;
+}
+
+.picker__close, .picker__today{
+  color: #295269;
+}
+
+.clockpicker-canvas line{
+  stroke: #295269;
+}
+
+.clockpicker-canvas-bg{
+  fill: #295269;
+}
+
+.clockpicker-canvas-bearing{
+  fill: #295269;
 }
 
 .container {
