@@ -1,0 +1,81 @@
+body {
+  background-color: #EEE;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  color: #244751;
+}
+
+nav {
+  background-color: #295269;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.container {
+  width: 60%;
+  background-color: white;
+  border-radius: 1em;
+  padding: 4em;
+  margin-top: 80px;
+}
+
+.break {
+  margin-top: 3em;
+}
+
+.brand-logo {
+  max-width: 70px;
+  margin-left: 20px;
+}
+
+
+#create {
+  margin-right: 20px;
+  background-color: #295269;
+}
+
+input[type=text]:focus:not([readonly]),
+input[type=password]:focus:not([readonly]),
+input[type=email]:focus:not([readonly]),
+input[type=url]:focus:not([readonly]),
+input[type=time]:focus:not([readonly]),
+input[type=date]:focus:not([readonly]),
+input[type=datetime-local]:focus:not([readonly]),
+input[type=tel]:focus:not([readonly]),
+input[type=number]:focus:not([readonly]),
+input[type=search]:focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #295269;
+  box-shadow: 0 1px 00 #295269;
+}
+
+input[type=text]:focus:not([readonly])+label,
+input[type=password]:focus:not([readonly])+label,
+input[type=email]:focus:not([readonly])+label,
+input[type=url]:focus:not([readonly])+label,
+input[type=time]:focus:not([readonly])+label,
+input[type=date]:focus:not([readonly])+label,
+input[type=datetime-local]:focus:not([readonly])+label,
+input[type=tel]:focus:not([readonly])+label,
+input[type=number]:focus:not([readonly])+label,
+input[type=search]:focus:not([readonly])+label,
+textarea.materialize-textarea:focus:not([readonly])+label {
+  color: #295269;
+}
+
+[type="checkbox"].filled-in:checked+label:after {
+  border: 2px solid #295269;
+  background-color: #295269;
+}
+
+.desc {
+  font-size: 1.5em;
+}
+
