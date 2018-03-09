@@ -5,14 +5,14 @@ const router  = express.Router();
 
 module.exports = (knex) => {
 
-  router.get("/", (req, res) => {
-    res.render('event')
+  router.get("/event", (req, res) => {
+    res.render('/event');
     // res.json('event');
   });
 
-  router.post("/", (req, res) => {
-    // TODO 
-  });
+  // router.post("/", (req, res) => {
+  //   // TODO 
+  // });
 
   return router;
 }
