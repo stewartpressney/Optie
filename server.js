@@ -80,7 +80,7 @@ app.post('/create', (req, res) =>{
   const userCreation = knex('users').insert({user_name: req.body.user_name, user_email:req.body.user_email});
   userCreation.returning('id')
   .asCallback((err, [id]) => {
-    console.log(id)
+    console.log('create id', id)
 
     if(err) {
       console.log(err);
@@ -94,9 +94,9 @@ app.post('/create', (req, res) =>{
     eventCreation.returning('id')
     .asCallback((err, id) => {
       // handle errorrsrs
-      console.log(err, id);
+      console.log('newURL', err, id);
       //res.render("event_detail")
-      res.redirect("/events/" + newURL);
+      res.redirect("/event/" + newURL);
     });
 
     

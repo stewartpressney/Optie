@@ -19,7 +19,7 @@ module.exports = (knex) => {
       })
       .returning('id')
       .then((id) => {
-        console.log(id);
+        console.log('id', id);
         res.status(200).send('Done!');
       });
 
@@ -32,20 +32,11 @@ module.exports = (knex) => {
       .from('events')
       .where('event_url', req.params.url)
       .then(function (data) {
-        console.log(data)
+        console.log('data', data)
         res.render("event_detail");
       });
 
   });
-
-  // app.post('/event/:id')
-  // router.post("/:id", (req, res) => {
-
-  // });
-
-  // router.post("/", (req, res) => {
-  //   // TODO 
-  // });
 
   return router;
 }

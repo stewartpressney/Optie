@@ -26,9 +26,9 @@ $(() => {
     console.log("submit success");
     event.preventDefault();
     var data = $('#createEvent').serialize();
-    console.log(data);
+    console.log('data app',data);
     $.post('/create', data).done(function (response) {
-      console.log(response);
+      console.log('res app work!');
       //redirect to created event page
 
 
