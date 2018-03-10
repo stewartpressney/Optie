@@ -10,6 +10,7 @@
   position: relative;
   overflow: hidden;
 }
+
 .wrap .bg {
   width: 100%;
   height: 100%;
@@ -29,6 +30,10 @@ h4,
 h5 {
   font-family: 'Noto Sans', sans-serif;
   color: white;
+}
+
+.eventTitle{
+  font size: 1.2em;
 }
 
 p {
@@ -119,3 +124,27 @@ textarea.materialize-textarea:focus:not([readonly]) {
 .desc {
   font-size: 1.5em;
 }
+
+.addMoreSlotsBtn {
+  border: none;*/
+	text-align: center;
+  background-color: #327AF9;
+  color: #FFF;
+	position: relative;
+}
+
+.deleteSlotsBtn {
+  border: none;
+  line-height: 30px;
+	height: 30px;
+	text-align: center;
+	width: 70px;
+  background-color: #8B0000;
+  color: #FFF;
+	position: relative;
+}
+
+.deleteSlotsBtn:focus{
+  background-color: red;
+}
+

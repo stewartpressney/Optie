@@ -22,8 +22,9 @@
   <div class="wrap">
     <div class="bg"></div>
       <div class="container">
-        <p>You have been invited by <strong><%= user.user_name %></strong> to:</p>
+         <p class="eventTitle">You have been invited by <strong><%= user.user_name %></strong> to:</p>
         <h2><%= event.event_title %></h2>
+        <p>Share this event with a friend:<strong>optie.io/<%= event.event_url %></strong></p>
         <p class="break">Meeting Point:</p>
         <h3><%= event.event_meeting %></h3>
         <p class="break">Description:</p>
@@ -44,7 +45,7 @@
               </div>
           </div>
           <div>
-            <p>Your Avalibility</p>
+            <p>Let <%= user.user_name %> know what days you are avalibile.</p>
              <% for(const slot of slots) { %>
             <p>
             <input type="checkbox" class="filled-in" id="filled-in-box-<%= slot.id %>" />

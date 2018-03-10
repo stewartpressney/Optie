@@ -7,7 +7,7 @@ var lFollowX = 0,
     lFollowY = 0,
     x = 0,
     y = 0,
-    friction = 1 / 100;
+    friction = 1 / 30;
 
 function moveBackground() {
   x += (lFollowX - x) * friction;
