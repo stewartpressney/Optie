@@ -24,6 +24,9 @@ const eventRoutes = require("./routes/event");
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
 
+var moment = require('moment');
+moment().format();
+
 // Log knex SQL queries to STDOUT as well
 app.use(knexLogger(knex));
 
@@ -41,6 +44,12 @@ app.set('views', path.join(__dirname, '/public/views'));
 
 // Home page
 app.get("/", (req, res) => {
+  console.log("here in home page")
+  res.render("main");
+});
+
+// Create page
+app.get("/create", (req, res) => {
   console.log("here in home page")
   res.render("event");
 });
@@ -88,20 +97,42 @@ app.post('/create', async(req, res) => {
 });
 
 
+// app.get('/events/:id', (req, res) => {
+
+//   const where = { event_url: req.params.id };
+
+//   const eventPrms = knex('events').where(where).first('*');
+
+//   const combinedPrms = eventPrms.then((event) => {
+//     const slotsPrms = knex('slots').where({ event_id: event.id }).select('*');
+//     const userPrms = knex('users').where({ id: event.user_id }).first('*');
+//     return Promise.all([event, slotsPrms, userPrms])
+//   });
+
+//   combinedPrms.then(([event, slots, user]) => {
+//       res.render("event_detail", { event, slots, user });
+//     });
 
 
+// });
 
-
-app.get('/events/:id', async(req, res) => {
+app.get('/events/:id', async (req, res) => {
 
   const where = { event_url: req.params.id };
 
-  const [event] = await knex('events').where(where).select('*');
-  const slots = await knex('slots').where({ event_id: event.id }).select('*');
-  const [user] = await knex('users').where({ id: event.user_id }).select('*');
+  const event = await knex('events').where(where).first('*');
 
-  res.render("event_detail", { event, slots, user });
+  const slotsPrms = knex('slots').where({ event_id: event.id }).select('*');
+  const userPrms = knex('users').where({ id: event.user_id }).first('*');
+
+  const slots = await slotsPrms;
+  const slot_date = moment(slots.slot_date).format('MMM/DD/YYYY');
+  const user = await userPrms;
+
+  res.render("event_detail", { event, slots, user, slot_date });
+
 });
+
 
 
 app.listen(PORT, () => {
@@ -109,9 +140,8 @@ app.listen(PORT, () => {
 });
 
 
-// find the user from req.body.user deriving user_id
 
-// HAHAHA, yp yours, jeremy!Vasili
+// HAHAHA, up yours, jeremy! ~Vasili
 
 
 // knex.table('users').where(req.body.user).then(user => {
