@@ -9,6 +9,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
   <link rel="stylesheet" type="text/css" href="../styles/layout.css">
   <link href="https://fonts.googleapis.com/css?family=Lato:300|Noto+Sans" rel="stylesheet">
+  <script type="text/javascript" src="/scripts/moviment.js"></script>
   <body>
     <nav>
       <div class="nav-wrapper">
@@ -16,90 +17,96 @@
       </div>
     </nav>
 
-    <div class="container">
-      <h1>Create an Event</h1>
-      <form method="POST" action="/create">
-          <!-- Row 1 -->
-          <div class="row">
+  <div class="wrap">
+    <div class="bg"></div>
 
-            <div class="input-field col s6">
-              <input name="user[user_name]" type="text" class="validate">
-              <label for="user_name">Full Name:</label>
-            </div>
+        <div class="container">
+          <h1>Create an Event</h1>
+          <form method="POST" action="/create">
+              <!-- Row 1 -->
+              <div class="row">
 
-            <div class="input-field col s6">
-              <input name="user[user_email]" type="email" class="validate">
-              <label for="user_email">Email:</label>
-            </div>
+                <div class="input-field col s6">
+                  <input name="user[user_name]" type="text" class="validate">
+                  <label for="user_name">Full Name:</label>
+                </div>
 
-          </div>
-          <!-- Row 2 - 4 -->
-          <div class="row">
-              <div class="input-field col s12">
-                <input name="event[event_title]" type="text" class="validate">
-                <label for="event_title">Event Title:</label>
+                <div class="input-field col s6">
+                  <input name="user[user_email]" type="email" class="validate">
+                  <label for="user_email">Email:</label>
+                </div>
+
               </div>
-          </div>
-
-          <div class="row">
-              <div class="input-field col s12">
-                <input name="event[event_meeting]" type="text" class="validate">
-                <label for="event_meeting">Meeting Point:</label>
+              <!-- Row 2 - 4 -->
+              <div class="row">
+                  <div class="input-field col s12">
+                    <input name="event[event_title]" type="text" class="validate">
+                    <label for="event_title">Event Title:</label>
+                  </div>
               </div>
-          </div>
 
-          <div class="row">
-              <div class="input-field col s12">
-                <textarea id="event_description" name="event[event_description]" class="materialize-textarea"></textarea>
-                <label for="event_description">Description:</label>
+              <div class="row">
+                  <div class="input-field col s12">
+                    <input name="event[event_meeting]" type="text" class="validate">
+                    <label for="event_meeting">Meeting Point:</label>
+                  </div>
               </div>
-          </div>
-          <!-- Row 5 - 7 -->
-          <div class="row">
-            <div class="input-field col s4">
-              <label for="date">Event Date</label>
-              <input type="text" name="suggestions[0][slot_date]" class="datepicker">
+
+              <div class="row">
+                  <div class="input-field col s12">
+                    <textarea id="event_description" name="event[event_description]" class="materialize-textarea"></textarea>
+                    <label for="event_description">Description:</label>
+                  </div>
+              </div>
+              <!-- Row 5 - 7 -->
+              <div class="row">
+                <div class="input-field col s4">
+                  <label for="date">Event Date</label>
+                  <input type="text" name="suggestions[0][slot_date]" class="datepicker">
+                </div>
+                <div class="input-field col s4">
+                  <label for="start">Start Time</label>
+                  <input type="text" name="suggestions[0][slot_start]" class="timepicker">
+                </div>
+                <div class="input-field col s4">
+                  <label for="end">End Time</label>
+                  <input type="text" name="suggestions[0][slot_end]" class="timepicker">
+                </div>
+              </div>
+               <div class="row">
+                <div class="input-field col s4">
+                  <label for="date">Event Date</label>
+                  <input type="text" name="suggestions[1][slot_date]" class="datepicker">
+                </div>
+                <div class="input-field col s4">
+                  <label for="start">Start Time</label>
+                  <input type="text" name="suggestions[1][slot_start]" class="timepicker">
+                </div>
+                <div class="input-field col s4">
+                  <label for="end">End Time</label>
+                  <input type="text" name="suggestions[1][slot_end]" class="timepicker">
+                </div>
+              </div>
+               <div class="row">
+                <div class="input-field col s4">
+                  <label for="date">Event Date</label>
+                  <input type="text" name="suggestions[2][slot_date]" class="datepicker">
+                </div>
+                <div class="input-field col s4">
+                  <label for="start">Start Time</label>
+                  <input type="text" name="suggestions[2][slot_start]" class="timepicker">
+                </div>
+                <div class="input-field col s4">
+                  <label for="end">End Time</label>
+                  <input type="text" name="suggestions[2][slot_end]" class="timepicker">
+                </div>
+              </div>
+              <button id="create" type="submit" action="/create" method="post" class="waves-effect waves-light btn right">Create Event</button>
+              </form>
             </div>
-            <div class="input-field col s4">
-              <label for="start">Start Time</label>
-              <input type="text" name="suggestions[0][slot_start]" class="timepicker">
-            </div>
-            <div class="input-field col s4">
-              <label for="end">End Time</label>
-              <input type="text" name="suggestions[0][slot_end]" class="timepicker">
-            </div>
-          </div>
-           <div class="row">
-            <div class="input-field col s4">
-              <label for="date">Event Date</label>
-              <input type="text" name="suggestions[1][slot_date]" class="datepicker">
-            </div>
-            <div class="input-field col s4">
-              <label for="start">Start Time</label>
-              <input type="text" name="suggestions[1][slot_start]" class="timepicker">
-            </div>
-            <div class="input-field col s4">
-              <label for="end">End Time</label>
-              <input type="text" name="suggestions[1][slot_end]" class="timepicker">
-            </div>
-          </div>
-           <div class="row">
-            <div class="input-field col s4">
-              <label for="date">Event Date</label>
-              <input type="text" name="suggestions[2][slot_date]" class="datepicker">
-            </div>
-            <div class="input-field col s4">
-              <label for="start">Start Time</label>
-              <input type="text" name="suggestions[2][slot_start]" class="timepicker">
-            </div>
-            <div class="input-field col s4">
-              <label for="end">End Time</label>
-              <input type="text" name="suggestions[2][slot_end]" class="timepicker">
-            </div>
-          </div>
-          <button id="create" type="submit" action="/create" method="post" class="waves-effect waves-light btn right">Create Event</button>
-          </form>
-        </div>
+    </div>
+
+
     </body>
     <script type="text/javascript">
 
