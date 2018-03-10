@@ -35,14 +35,14 @@
     <p class="desc"><%= event.event_description %></p>
     <h4>RSVP:</h4>
     <div class="row">
-      <form class="col s12">
+      <form class="col s12" method="POST" action="/vote">
         <div class="row">
           <div class="input-field col s6">
-            <input id="first_name" type="text" class="validate">
+            <input id="first_name" name="user[user_name]" type="text" class="validate">
             <label for="first_name">Full Name:</label>
           </div>
           <div class="input-field col s6">
-            <input id="email" type="email" class="validate">
+            <input id="email" name="user[user_email]" type="email" class="validate">
             <label for="email">Email:</label>
           </div>
         </div>
@@ -54,7 +54,7 @@
           <label for="filled-in-box-<%= slot.id %>"><%= slot_date %> ( <%= slot.slot_start %> - <%= slot.slot_end %> ) - <strong>0 Votes</strong></label>
         </p>
         <% }; %>
-        <a href="file:///Users/Stewart/lighthouse/optie/public/views/index.html#" id="create" class="waves-effect waves-light btn right" type="submit" action="/vote">Share RSVP</a>
+        <button id="create" class="waves-effect waves-light btn right" type="submit" >Share RSVP</a>
       </form>
     </div>
   </div>

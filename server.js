@@ -102,6 +102,24 @@ app.post('/create', async(req, res) => {
 });
 
 
+//Attendance
+app.post('/vote', async(req, res) => {
+
+  const userCreation = knex('users').insert({user_name: req.body.user_name, user_email:req.body.user_email});
+  userCreation.returning('id')
+  .asCallback((err, [id]) => {
+    console.log(id)
+    console.log(res.params)
+  res.render("event");
+  });
+
+});
+
+
+
+
+
+
 // app.get('/events/:id', (req, res) => {
 
 //   const where = { event_url: req.params.id };
