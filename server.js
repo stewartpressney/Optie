@@ -72,8 +72,7 @@ app.post('/create', async(req, res) => {
     if (!user) {
       // User with these doesn't exist
       const [new_user] = await knex('users').insert(req.body.user).returning('id');
-      user_id = new_user.id;
-      
+      user_id = new_user;
     } else {
       user_id = user.id;
       
@@ -117,11 +116,9 @@ app.post('/create', async(req, res) => {
 // });
 
 app.get('/events/:id', async (req, res) => {
-
   const where = { event_url: req.params.id };
 
   const event = await knex('events').where(where).first('*');
-
   const slotsPrms = knex('slots').where({ event_id: event.id }).select('*');
   const userPrms = knex('users').where({ id: event.user_id }).first('*');
 
@@ -130,7 +127,6 @@ app.get('/events/:id', async (req, res) => {
   const user = await userPrms;
 
   res.render("event_detail", { event, slots, user, slot_date });
-
 });
 
 
