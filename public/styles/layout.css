@@ -133,3 +133,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 	position: relative;	
 }
 
+.deleteSlotsBtn:focus{
+  background-color: red;
+}
+

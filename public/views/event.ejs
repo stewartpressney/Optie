@@ -63,12 +63,12 @@
               <input type="text" name="suggestions[0][slot_date]" class="datepicker">
             </div>
             <div class="input-field col s4 form-group">
-              <label for="start">Start Time</label>
-              <input type="text" name="suggestions[0][slot_start]" class="timepicker">
+              <label for="start0">Start Time</label>
+              <input id="start0" type="text" name="suggestions[0][slot_start]" class="timepicker">
             </div>
             <div class="input-field col s4 form-group">
-              <label for="end">End Time</label>
-              <input type="text" name="suggestions[0][slot_end]" class="timepicker">
+              <label for="end0">End Time</label>
+              <input id="end0" type="text" name="suggestions[0][slot_end]" class="timepicker">
             </div>
           </div>
         </div>
@@ -122,12 +122,12 @@
               <input type="text" name="suggestions[${id}][slot_date]" class="datepicker">
             </div>
             <div class="input-field col s4 form-group">
-              <label for="start">Start Time</label>
-              <input type="text" name="suggestions[${id}][slot_start]" class="timepicker">
+              <label for="start${id}">Start Time</label>
+              <input id="start${id}" type="text" name="suggestions[${id}][slot_start]" class="timepicker">
             </div>
             <div class="input-field col s4 form-group">
-              <label for="end">End Time</label>
-              <input type="text" name="suggestions[${id}][slot_end]" class="timepicker">
+              <label for="end${id}">End Time</label>
+              <input id="end${id}" type="text" name="suggestions[${id}][slot_end]" class="timepicker">
             </div>
           </div>`
         id += 1;
