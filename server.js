@@ -46,8 +46,8 @@ app.get("/", (req, res) => {
 });
 
 //Mount all resource routes (prefix)
-app.use("/api/users", usersRoutes(knex));
-app.use("/event", eventRoutes(knex));
+// app.use("/api/users", usersRoutes(knex));
+// app.use("/event", eventRoutes(knex));
 
 
 
@@ -58,37 +58,32 @@ app.post('/create', async(req, res) => {
     console.dir(req.body, { colors: true })
 
     let user_id;
-
     const [user] = await knex('users').where(req.body.user).select('id');
-
-
 
     if (!user) {
       // User with these doesn't exist
       const [new_user] = await knex('users').insert(req.body.user).returning('id');
       user_id = new_user.id;
+      
     } else {
       user_id = user.id;
+      
     }
 
     // const event = req.body.event;
     // event.user_id = user_id;
 
     const event_url = new Date().getTime().toString(32);
-
     const new_event = { ...req.body.event, user_id, event_url };
-
     const [event_id] = await knex('events').insert(new_event).returning('id');
 
-
     await knex('slots').insert(req.body.suggestions.map(suggestion => ({ ...suggestion, event_id })));
-
     // Object.assign({}, suggestion, { event_id }) - the ... bit above
-
-
+    
     res.redirect('/events/' + event_url);
   } catch (ex) {
     res.json({ error: ex.message });
+    
   }
 });
 

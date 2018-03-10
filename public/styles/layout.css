@@ -102,3 +102,34 @@ textarea.materialize-textarea:focus:not([readonly]) {
 .desc {
   font-size: 1.5em;
 }
+
+.addMoreSlotsBtn { 
+  border: none;
+  line-height: 30px;
+	height: 30px;
+	text-align: center;
+	width: 70px;
+  background-color: #2F4F4F; 
+  color: #FFF;
+	position: relative;	
+}
+
+/*.btn-two span {
+	z-index: 2;	
+	display: block;
+	position: absolute;
+	width: 100%;
+	height: 100%;	
+}*/
+
+.deleteSlotsBtn { 
+  border: none;
+  line-height: 30px;
+	height: 30px;
+	text-align: center;
+	width: 70px;
+  background-color: #8B0000; 
+  color: #FFF;
+	position: relative;	
+}
+
