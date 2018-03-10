@@ -21,19 +21,18 @@
 </head>
 
 <body>
-  <pre style="margin-top: 5em"><%= JSON.stringify({ user, event, slots}, null, 4) %></pre>
   <nav>
     <div class="nav-wrapper">
       <a href="#" class="brand-logo left">OPTIE</a>
     </div>
   </nav>
   <div class="container">
-    <p>You have been invited by <strong>James Smith</strong> to:</p>
-    <h2>Grouse Grind Hike</h2>
+    <p>You have been invited by <strong><%= user.user_name %></strong> to:</p>
+    <h2><%= event.event_title %></h2>
     <p class="break">Meeting Point:</p>
-    <h3>Grind Trailhead</h3>
+    <h3><%= event.event_meeting %></h3>
     <p class="break">Description:</p>
-    <p class="desc">Let's do the grouse grind, Beers afterwards!</p>
+    <p class="desc"><%= event.event_description %></p>
     <h4>RSVP:</h4>
     <div class="row">
       <form class="col s12">
@@ -48,18 +47,13 @@
           </div>
         </div>
         <p>Share your Avalibility</p>
+
+        <% for(const slot of slots) { %>
         <p>
-          <input type="checkbox" class="filled-in" id="filled-in-box" />
-          <label for="filled-in-box">10/5/2018 - 6:00am - 9:00pm - 6 Votes</label>
+          <input type="checkbox" class="filled-in" id="filled-in-box-<%= slot.id %>"/>
+          <label for="filled-in-box-<%= slot.id %>"><%= slot_date %> - <%= slot.slot_start %> - <%= slot.slot_end %> - 6 Votes</label>
         </p>
-        <p>
-          <input type="checkbox" class="filled-in" id="filled-in-box1" />
-          <label for="filled-in-box1">10/5/2018 - 9:00am - 6:00pm - 2 Votes</label>
-        </p>
-        <p>
-          <input type="checkbox" class="filled-in" id="filled-in-box2" />
-          <label for="filled-in-box2">10/5/2018 - 10:00am - 2:00pm - 0 Votes</label>
-        </p>
+        <% }; %>
         <a href="file:///Users/Stewart/lighthouse/optie/public/views/index.html#" id="create" class="waves-effect waves-light btn right" action="submit">Share RSVP</a>
       </form>
     </div>
