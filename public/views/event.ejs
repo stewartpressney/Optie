@@ -13,7 +13,7 @@
   <body>
     <nav>
       <div class="nav-wrapper">
-        <a href="#" class="brand-logo left">OPTIE</a>
+        <a href="http://localhost:8080/" class="brand-logo left">OPTIE</a>
       </div>
     </nav>
 
@@ -58,15 +58,15 @@
         <!-- Row 5 - 7 -->
         <div id='possible-slots'>
           <div class="row">
-            <div class="input-field col s4 form-group">
+            <div class="input-field col s4">
               <label for="date">Event Date</label>
               <input type="text" name="suggestions[0][slot_date]" class="datepicker">
             </div>
-            <div class="input-field col s4 form-group">
+            <div class="input-field col s3">
               <label for="start0">Start Time</label>
               <input id="start0" type="text" name="suggestions[0][slot_start]" class="timepicker">
             </div>
-            <div class="input-field col s4 form-group">
+            <div class="input-field col s3">
               <label for="end0">End Time</label>
               <input id="end0" type="text" name="suggestions[0][slot_end]" class="timepicker">
             </div>
@@ -76,12 +76,9 @@
         <!--addMoreEvent & delete button-->
         <div>
           <button class="addMoreSlotsBtn" type="button">Add</button>
-        </div>
-        <div>
-          <button class="deleteSlotsBtn" type="button">Delete</button>
-        </div>
+        </div class="input-field col s3">
         <!--addMoreEvent & delete end-->
-        <button id="create" type="submit" action="/create" method="post" class="waves-effect waves-light btn right">Create Event</button>
+        <button id="create" type="submit" class="waves-effect waves-light btn right">Create Event</button>
       </form>
     </div>
   </body>
@@ -117,32 +114,37 @@
       var id = 1;
       function makeNewSlotBlock() {
         var content = `<div class="row form-block">
-            <div class="input-field col s4 form-group">
+            <div class="input-field col s4">
               <label for="date">Event Date</label>
               <input type="text" name="suggestions[${id}][slot_date]" class="datepicker">
             </div>
-            <div class="input-field col s4 form-group">
+            <div class="input-field col s3">
               <label for="start${id}">Start Time</label>
               <input id="start${id}" type="text" name="suggestions[${id}][slot_start]" class="timepicker">
             </div>
-            <div class="input-field col s4 form-group">
+            <div class="input-field col s3">
               <label for="end${id}">End Time</label>
               <input id="end${id}" type="text" name="suggestions[${id}][slot_end]" class="timepicker">
+            </div>
+            <div class="input-field col s2">
+              <button class="deleteSlotsBtn" type="button">Delete</button>
             </div>
           </div>`
         id += 1;
         return content;
       }
+      function addOneDeleteBtn() {
+
+      }
       $(".addMoreSlotsBtn").on("click", function () {
         $possibleSlots.append(makeNewSlotBlock());
         activeDatePicker();
         activeTimePicker();
+        $(".deleteSlotsBtn").on("click", function (event) {
+          event.stopPropagation();
+          $(this).parent().parent().remove();
+        });
       });
-
-      $(".deleteSlotsBtn").on("click", function () {
-        $("#possible-slots .row").last().remove();
-      });
-
     });
   </script>
 
