@@ -46,15 +46,15 @@
             <label for="email">Email:</label>
           </div>
         </div>
-        <p>Share your Avalibility</p>
+        <p>Your Avalibility</p>
 
         <% for(const slot of slots) { %>
         <p>
           <input type="checkbox" class="filled-in" id="filled-in-box-<%= slot.id %>"/>
-          <label for="filled-in-box-<%= slot.id %>"><%= slot_date %> - <%= slot.slot_start %> - <%= slot.slot_end %> - 6 Votes</label>
+          <label for="filled-in-box-<%= slot.id %>"><%= slot_date %> ( <%= slot.slot_start %> - <%= slot.slot_end %> ) - <strong>0 Votes</strong></label>
         </p>
         <% }; %>
-        <a href="file:///Users/Stewart/lighthouse/optie/public/views/index.html#" id="create" class="waves-effect waves-light btn right" action="submit">Share RSVP</a>
+        <a href="file:///Users/Stewart/lighthouse/optie/public/views/index.html#" id="create" class="waves-effect waves-light btn right" type="submit" action="/vote">Share RSVP</a>
       </form>
     </div>
   </div>
