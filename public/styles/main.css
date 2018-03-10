@@ -1,0 +1,58 @@
+@import url(https://fonts.googleapis.com/css?family=Libre+Baskerville:400,700);
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+html, body {
+  height: 100%;
+}
+body {
+  position: relative;
+  font-family: 'Libre Baskerville', serif;
+}
+h1 {
+  margin: 0;
+  padding: 0;
+  margin-top: -50px;
+  padding-left: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: white;
+  font-size: 4vmin;
+  text-align: center;
+  transform: translate3d(-50%, -50%, 0);
+}
+.wrap {
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.wrap .bg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/167792/mountains_copy.jpg') no-repeat center center;
+  background-size: cover;
+  transform: scale(1.1);
+}
+
+.container {
+  width: 60%;
+  background-color: rgba(250, 250, 250, 0.3);
+  border-radius: 1em;
+  padding: 4em;
+  margin-top: 300px;
+  height: 240px;
+}
+
+#create {
+  background-color: #387ff5;
+}
+
+#logo{
+  height: 110px;
+  width: 110px;
+}
