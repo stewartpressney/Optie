@@ -42,6 +42,12 @@ app.set('views', path.join(__dirname, '/public/views'));
 // Home page
 app.get("/", (req, res) => {
   console.log("here in home page")
+  res.render("main");
+});
+
+// Create page
+app.get("/create", (req, res) => {
+  console.log("here in home page")
   res.render("event");
 });
 
