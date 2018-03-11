@@ -73,8 +73,12 @@ app.post('/create', async(req, res) => {
 
   }
 });
+
+
 //Attendance
 app.post('/vote', (req, res) => {
+
+  
 
   const userCreation = knex('users').insert([{user_name: req.body.user_name, user_email:req.body.user_email}]);
   userCreation.returning('id')
@@ -87,21 +91,28 @@ app.post('/vote', (req, res) => {
     .asCallback((err, [id]) => {
       const idFromEvent = id.id
 
+    
+
       const getIdSlot = knex.select('id').from('slots').where('event_id', idFromEvent);
-      getIdEvent.returning('id')
-      .asCallback((err, [id]) => {
-        const idFromSlots = id.id
+      getIdSlot.then((result)=>{
+        
+        for (var y = 0; y < req.body.checkbox.length; y++){
+          var index = req.body.checkbox[y]
+          
+          const idFromSlots =result[index].id;
+          const insertAttendance = knex('attendance').insert([{slot_id: idFromSlots, user_id:idFromUser, available:true}]);
+          insertAttendance.then(()=>{
+          });
+        }
 
-        const insertAttendance = knex('attendance').insert([{slot_id: idFromSlots, user_id:idFromUser, available:true}]);
-        insertAttendance.returning('id')
-        .asCallback((err, [id]) => {
+      res.redirect('/events/' + urlFromEvent);
+        
 
-            res.render("event");
-        });
       });
     });
   });
 });
+
 // app.get('/events/:id', (req, res) => {
 //   const where = { event_url: req.params.id };
 //   const eventPrms = knex('events').where(where).first('*');
@@ -123,16 +134,25 @@ app.get('/events/:id', async (req, res) => {
   const slots = await slotsPrms;
   const slot_date = moment(slots.slot_date).format('MMM/DD/YYYY');
   const user = await userPrms;
-  // const totalVote = knex('attendance').count('id')
-  // .where('slot_id', slots.id)
-  // .andWhere('available', 'true')
-  // .then((result)=>{
 
-  //  result[0].count;
-  //   console.log(totalVote)
+  
+ 
+
+  for (var z = 0; z < slots.length; z++){
+    await knex('attendance').count('id')
+    .where('slot_id', slots[z].id)
+    .andWhere('available', 'true')
+    .then((result)=>{
+      slots[z].vote_count = result[0].count;
+    });
+  }
+
   res.render("event_detail", {event, slots, user, slot_date, event_id: event_id});
-  });
-// });
+  
+});
+
+
+
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
 });
