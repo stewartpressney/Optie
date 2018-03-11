@@ -132,7 +132,6 @@ app.get('/events/:id', async (req, res) => {
   const slotsPrms = knex('slots').where({ event_id: event.id }).select('*');
   const userPrms = knex('users').where({ id: event.user_id }).first('*');
   const slots = await slotsPrms;
-  const slot_date = moment(slots.slot_date).format('MMM/DD/YYYY');
   const user = await userPrms;
 
   
@@ -144,10 +143,11 @@ app.get('/events/:id', async (req, res) => {
     .andWhere('available', 'true')
     .then((result)=>{
       slots[z].vote_count = result[0].count;
+      slots[z].slot_date = moment(slots[z].slot_date).format('MMM/DD/YYYY');
     });
   }
-
-  res.render("event_detail", {event, slots, user, slot_date, event_id: event_id});
+  
+  res.render("event_detail", {event, slots, user, event_id: event_id});
   
 });
 
