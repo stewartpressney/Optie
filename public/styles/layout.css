@@ -28,7 +28,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Comfortaa', sans-serif;
   color: white;
 }
 
@@ -86,6 +86,7 @@ nav {
 .brand-logo {
   max-width: 70px;
   margin-left: 20px;
+  font-family: 'Comfortaa', sans-serif;
 }
 
 
@@ -132,6 +133,23 @@ textarea.materialize-textarea:focus:not([readonly]) {
   color: #FFF;
 	position: relative;
 }
+.addMoreSlotsBtn:focus {
+  background-color: #327AF9;
+
+}
+
+.addMoreSlotsBtn:focus {
+  background-color: #327AF9;
+
+}
+
+.picker__day--selected,
+.picker__day--selected:hover,
+.picker--focused
+.picker__day--selected {
+  background-color: #327AF9;
+}
+
 
 .deleteSlotsBtn {
   border: none;
