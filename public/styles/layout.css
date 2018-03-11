@@ -89,6 +89,11 @@ nav {
   font-family: 'Comfortaa', sans-serif;
 }
 
+.materialize-textarea:visited {
+  border-bottom: 1px solid #4CAF4F;
+
+}
+
 
 #create {
   background-color: #327AF9;
