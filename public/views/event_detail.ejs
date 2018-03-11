@@ -38,22 +38,26 @@
       <form class="col s12" method="POST" action="/vote">
         <div class="row">
           <div class="input-field col s6">
-            <input id="first_name" name="user[user_name]" type="text" class="validate">
+            <input id="first_name" name="user_name" type="text" class="validate">
             <label for="first_name">Full Name:</label>
           </div>
           <div class="input-field col s6">
-            <input id="email" name="user[user_email]" type="email" class="validate">
+            <input id="email" name="user_email" type="email" class="validate">
             <label for="email">Email:</label>
           </div>
         </div>
         <p>Your Avalibility</p>
-
+        <% var x = 0; %>
         <% for(const slot of slots) { %>
-        <p>
-          <input type="checkbox" class="filled-in" id="filled-in-box-<%= slot.id %>"/>
-          <label for="filled-in-box-<%= slot.id %>"><%= slot_date %> ( <%= slot.slot_start %> - <%= slot.slot_end %> ) - <strong>0 Votes</strong></label>
-        </p>
+          <p>
+            <input name="checkbox" value = '<%=[x]%>' type="checkbox" class="filled-in" id="filled-in-box-<%= slot.id %>"/>
+            <label for="filled-in-box-<%= slot.id %>"><%= slot_date %> ( <%= slot.slot_start %> - <%= slot.slot_end %> ) - <strong> <%= slot.vote_count %>  Vote(s)</strong></label>
+          </p>
+          <% x = x+1; %>
         <% }; %>
+        
+ 
+        <input type="hidden" name="event_id" value="<%= event_id%>">
         <button id="create" class="waves-effect waves-light btn right" type="submit" >Share RSVP</a>
       </form>
     </div>

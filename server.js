@@ -97,22 +97,40 @@ app.post('/create', async(req, res) => {
 
 
 //Attendance
-app.post('/vote', async(req, res) => {
+app.post('/vote', (req, res) => {
 
-  const userCreation = knex('users').insert({user_name: req.body.user_name, user_email:req.body.user_email});
+  
+  const userCreation = knex('users').insert([{user_name: req.body.user_name, user_email:req.body.user_email}]);
   userCreation.returning('id')
   .asCallback((err, [id]) => {
-    console.log(id)
-    console.log(res.params)
-  res.render("event");
+    const idFromUser = id;
+    const urlFromEvent = req.body.event_id;
+
+    
+    const getIdEvent = knex.select('id').from('events').where('event_url', urlFromEvent);
+    getIdEvent.returning('id')
+    .asCallback((err, [id]) => {
+      const idFromEvent = id.id
+    
+
+      const getIdSlot = knex.select('id').from('slots').where('event_id', idFromEvent);
+      getIdSlot.then((result)=>{
+        
+        for (var y = 0; y < req.body.checkbox.length; y++){
+          var index = req.body.checkbox[y]
+          
+          const idFromSlots =result[index].id;
+          const insertAttendance = knex('attendance').insert([{slot_id: idFromSlots, user_id:idFromUser, available:true}]);
+          insertAttendance.then(()=>{
+          });
+        }
+
+      res.redirect('/events/' + urlFromEvent);
+        
+      });
+    });
   });
-
 });
-
-
-
-
-
 
 // app.get('/events/:id', (req, res) => {
 
@@ -135,7 +153,7 @@ app.post('/vote', async(req, res) => {
 
 app.get('/events/:id', async (req, res) => {
   const where = { event_url: req.params.id };
-
+  var event_id = req.params.id;
   const event = await knex('events').where(where).first('*');
   const slotsPrms = knex('slots').where({ event_id: event.id }).select('*');
   const userPrms = knex('users').where({ id: event.user_id }).first('*');
@@ -143,8 +161,20 @@ app.get('/events/:id', async (req, res) => {
   const slots = await slotsPrms;
   const slot_date = moment(slots.slot_date).format('MMM/DD/YYYY');
   const user = await userPrms;
+  
+ 
 
-  res.render("event_detail", { event, slots, user, slot_date });
+  for (var z = 0; z < slots.length; z++){
+    await knex('attendance').count('id')
+    .where('slot_id', slots[z].id)
+    .andWhere('available', 'true')
+    .then((result)=>{
+      slots[z].vote_count = result[0].count;
+    });
+  }
+
+  res.render("event_detail", {event, slots, user, slot_date, event_id: event_id});
+  
 });
 
 
