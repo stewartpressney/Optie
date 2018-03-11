@@ -59,8 +59,8 @@
           <div class="row">
             <h4>When is your event?</h4>
             <div class="input-field col s4">
-              <label for="date">Event Date</label>
-              <input type="text" name="suggestions[0][slot_date]" class="datepicker">
+              <label for="date0">Event Date</label>
+              <input id="date0" type="text" name="suggestions[0][slot_date]" class="datepicker">
             </div>
             <div class="input-field col s3">
               <label for="start0">Start Time</label>
@@ -118,7 +118,7 @@
         `<div class="row form-block">
             <div class="input-field col s4">
               <label for="date${id}">Event Date</label>
-              <input id="date${id}" name="suggestions[${id}][slot_date]" class="datepicker">
+              <input id="date${id}" type="text" name="suggestions[${id}][slot_date]" class="datepicker">
             </div>
             <div class="input-field col s3">
               <label for="start${id}">Start Time</label>

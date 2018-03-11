@@ -125,8 +125,20 @@ textarea.materialize-textarea:focus:not([readonly]) {
   font-size: 1.5em;
 }
 
+#event_description {
+  color: white;
+}
+
+#eventURL {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+
+
+
 .addMoreSlotsBtn {
-  border: none;*/
+  border: none;
 	text-align: center;
   background-color: #327AF9;
   color: #FFF;
@@ -147,4 +159,6 @@ textarea.materialize-textarea:focus:not([readonly]) {
 .deleteSlotsBtn:focus{
   background-color: red;
 }
+
+
 
