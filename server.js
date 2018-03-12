@@ -79,7 +79,7 @@ app.post('/create', async(req, res) => {
 app.post('/vote', (req, res) => {
 
   
-
+  
   const userCreation = knex('users').insert([{user_name: req.body.user_name, user_email:req.body.user_email}]);
   userCreation.returning('id')
   .asCallback((err, [id]) => {
@@ -101,7 +101,8 @@ app.post('/vote', (req, res) => {
           
           const idFromSlots =result[index].id;
           const insertAttendance = knex('attendance').insert([{slot_id: idFromSlots, user_id:idFromUser, available:true}]);
-          insertAttendance.then(()=>{
+          insertAttendance.then((res)=>{
+            
           });
         }
 
@@ -146,8 +147,33 @@ app.get('/events/:id', async (req, res) => {
       slots[z].slot_date = moment(slots[z].slot_date).format('MMM/DD/YYYY');
     });
   }
-  
   res.render("event_detail", {event, slots, user, event_id: event_id});
+  
+});
+
+app.get('/json/events/:id', async (req, res) => {
+  console.log("datafrom1", req.body);
+  const where = { event_url: req.params.id };
+  var event_id = req.params.id;
+  const event = await knex('events').where(where).first('*');
+  const slotsPrms = knex('slots').where({ event_id: event.id }).select('*');
+  const userPrms = knex('users').where({ id: event.user_id }).first('*');
+  const slots = await slotsPrms;
+  const user = await userPrms;
+
+  
+ 
+
+  for (var z = 0; z < slots.length; z++){
+    await knex('attendance').count('id')
+    .where('slot_id', slots[z].id)
+    .andWhere('available', 'true')
+    .then((result)=>{
+      slots[z].vote_count = result[0].count;
+      slots[z].slot_date = moment(slots[z].slot_date).format('MMM/DD/YYYY');
+    });
+  }
+  res.json({event, slots, user, event_id: event_id});
   
 });
 
