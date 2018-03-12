@@ -40,7 +40,7 @@
       </p>
       <h4>RSVP:</h4>
       <div class="row">
-        <form class="col s12" method="POST" action="/vote">
+        <form class="col s12">
           <div class="row">
             <div class="input-field col s6">
               <input id="first_name" name="user_name" type="text" class="validate">
@@ -59,15 +59,16 @@
           <% var x = 0; %>
             <% for(const slot of slots) { %>
               <p>
-                <input name="checkbox" value='<%=[x]%>' type="checkbox" class="filled-in" id="filled-in-box-<%= slot.id %>" />
-                <label for="filled-in-box-<%= slot.id %>"><%= slot.slot_date %> ( <%= slot.slot_start %> - <%= slot.slot_end %> ) - <strong> <%= slot.vote_count %>  Vote(s)</strong></label>
+                <input name="checkbox" value='<%=[x]%>' type="checkbox" class="filled-in clearCheckbox" id="filled-in-box-<%= slot.id %>"
+                />
+                <label for="filled-in-box-<%= slot.id %>"><%= slot.slot_date %> ( <%= slot.slot_start %> - <%= slot.slot_end %> ) - <strong> <span id="voteCount-<%=[x]%>"> <%= slot.vote_count %> </span> Vote(s)</strong></label>
               </p>
               <% x = x+1; %>
-            <% }; %>
+                <% }; %>
 
 
-          <input type="hidden" name="event_id" value="<%= event_id%>">
-          <button id="create" class="waves-effect waves-light btn right" type="submit">Share RSVP</a>
+                  <input type="hidden" name="event_id" value="<%= event_id%>">
+                  <button id="create" class="waves-effect waves-light btn right">Share RSVP</a>
       </form>
 
     </div>
@@ -75,6 +76,22 @@
 <script>
   $(() => {
     $('#eventURL strong').text(location.href);
+
+    var $form = $('.col.s12');
+    $form.on('submit', function (event) {
+      event.preventDefault();
+      var data = $('.col.s12').serialize();
+      $.post('/vote', data).done(function (response) {
+        var eventURL = location.pathname.replace("/events/", "");
+        $('input:checkbox').removeAttr('checked');
+        $.get('/json/events/' + eventURL).done(function (response) {
+          for (var i = 0; i < response.slots.length; i++) {
+            $('#voteCount-' + i).text(response.slots[i].vote_count);
+          }
+        })
+      });
+    })
+
   });
   function copyToClipboard(element) {
     var x = $("#eventURL").text();
@@ -84,7 +101,7 @@
     document.execCommand("copy");
     $temp.remove();
   }
-  
+
 </script>
 
 </html>
