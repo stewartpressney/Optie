@@ -18,137 +18,158 @@
         <a href="http://localhost:8080/" class="brand-logo left">OPTIE</a>
       </div>
     </nav>
-
-  <div class="wrap">
-    <div class="bg"></div>
-
-  <div class="container">
-      <h1>Create an Event :</h1>
-      <form method="POST" action="/create">
-        <!-- Row 1 -->
-        <div class="row">
-          <div class="input-field col s6">
-            <input name="user[user_name]" type="text" class="validate" required>
-            <label for="user_name">Full Name:</label>
-          </div>
-          <div class="input-field col s6">
-            <input name="user[user_email]" type="email" class="validate" required>
-            <label for="user_email">Email:</label>
-          </div>
-        </div>
-        <!-- Row 2 - 4 -->
-        <div class="row">
-          <div class="input-field col s12">
-            <input name="event[event_title]" type="text" class="validate" required>
-            <label for="event_title">Event Title:</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <input name="event[event_meeting]" type="text" class="validate" required>
-            <label for="event_meeting">Meeting Point:</label>
-          </div>
-        </div>
-        <div class="row">
-          <div class="input-field col s12">
-            <textarea id="event_description" name="event[event_description]" class="materialize-textarea"></textarea>
-            <label for="event_description">Description:</label>
-          </div>
-        </div>
-        <!-- Row 5 - 7 -->
-        <div id='possible-slots'>
+    <div class="wrap">
+      <div class="bg"></div>
+      <div class="container">
+        <h1>Create an Event :</h1>
+        <form method="POST" action="/create">
+          <!-- Row 1 -->
           <div class="row">
-            <h4>Set Your Avaliblity :</h4>
-            <div class="input-field col s4">
-              <label for="date0">Event Date</label>
-              <input id="date0" type="text" name="suggestions[0][slot_date]" class="datepicker">
+            <div class="input-field col s6">
+              <input name="user[user_name]" type="text" class="validate" required>
+              <label for="user_name">Full Name:</label>
             </div>
-            <div class="input-field col s3">
-              <label for="start0">Start Time</label>
-              <input id="start0" type="text" name="suggestions[0][slot_start]" class="timepicker">
-            </div>
-            <div class="input-field col s3">
-              <label for="end0">End Time</label>
-              <input id="end0" type="text" name="suggestions[0][slot_end]" class="timepicker">
+            <div class="input-field col s6">
+              <input name="user[user_email]" type="email" class="validate" required>
+              <label for="user_email">Email:</label>
             </div>
           </div>
-        </div>
-        <!--addMoreEvent & delete button-->
-        <div>
-          <button class="addMoreSlotsBtn" type="button">Suggest Another Time</button>
-        </div>
-        <!--addMoreEvent & delete end-->
-        <button id="create" type="submit" class="waves-effect waves-light btn right">Create Optie</button>
-      </form>
-    </div>
+          <!-- Row 2 - 4 -->
+          <div class="row">
+            <div class="input-field col s12">
+              <input name="event[event_title]" type="text" class="validate" required>
+              <label for="event_title">Event Title:</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <input name="event[event_meeting]" type="text" class="validate" required>
+              <label for="event_meeting">Meeting Point:</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <textarea id="event_description" name="event[event_description]" class="materialize-textarea"></textarea>
+              <label for="event_description">Description:</label>
+            </div>
+          </div>
+          <!-- Row 5 - 7 -->
+          <div id='possible-slots'>
+            <div class="row">
+              <h4>Set Your Avaliblity :</h4>
+              <div class="input-field col s4">
+                <label for="date0">Event Date</label>
+                <input id="date0" type="text" name="suggestions[0][slot_date]" class="datepicker" required>
+              </div>
+              <div class="input-field col s3">
+                <label for="start0">Start Time</label>
+                <input id="start0" type="text" name="suggestions[0][slot_start]" class="timepicker" required>
+              </div>
+              <div class="input-field col s3">
+                <label for="end0">End Time</label>
+                <input id="end0" type="text" name="suggestions[0][slot_end]" class="timepicker" required>
+              </div>
+            </div>
+          </div>
+          <!--addMoreEvent & delete button-->
+          <div>
+            <button class="addMoreSlotsBtn" type="button">Suggest Another Time</button>
+          </div>
+          <!--addMoreEvent & delete end-->
+          <button id="create" type="submit" class="waves-effect waves-light btn right">Create Optie</button>
+        </form>
+      </div>
   </body>
   <script type="text/javascript">
-    $(function () {
-      function activeTimePicker() {
-        $('.timepicker').pickatime({
-          default: '12:00pm', // Set default time: 'now', '1:30AM', '16:30'
-          fromnow: 0, // set default time to * milliseconds from now (using with default = 'now')
-          twelvehour: true, // Use AM/PM or 24-hour format
-          donetext: 'OK', // text for done-button
-          cleartext: 'Clear', // text for clear-button
-          canceltext: 'Cancel', // Text for cancel-button
-          autoclose: false, // automatic close timepicker
-          ampmclickable: true, // make AM PM clickable
-          // aftershow: function() {} //Function for after opening timepicker
-        });
-      }
+  $(function() {
+    function activeTimePicker() {
+      $('.timepicker').pickatime({
+        default: '12:00pm', // Set default time: 'now', '1:30AM', '16:30'
+        fromnow: 0, // set default time to * milliseconds from now (using with default = 'now')
+        twelvehour: true, // Use AM/PM or 24-hour format
+        donetext: 'OK', // text for done-button
+        cleartext: 'Clear', // text for clear-button
+        canceltext: 'Cancel', // Text for cancel-button
+        autoclose: false, // automatic close timepicker
+        ampmclickable: true, // make AM PM clickable
+        // aftershow: function() {} //Function for after opening timepicker
+      });
+    }
 
-      function activeDatePicker() {
-        $('.datepicker').pickadate({
-          selectMonths: true, // Creates a dropdown to control month
-          selectYears: 15, // Creates a dropdown of 15 years to control year,
-          today: 'Today',
-          clear: 'Clear',
-          close: 'Ok',
-          closeOnSelect: false // Close upon selecting a date,
-        });
-      }
+    function activeDatePicker() {
+      $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 15, // Creates a dropdown of 15 years to control year,
+        today: 'Today',
+        clear: 'Clear',
+        close: 'Ok',
+        closeOnSelect: false, // Close upon selecting a date,
 
-      activeDatePicker();
-      activeTimePicker();
-      //add more slots after click the Add
-      var $possibleSlots = $("#possible-slots");
-      var id = 1;
-      function makeNewSlotBlock() {
-        var content =
+      });
+    }
+
+    window.onerror = function(msg, url, line, col, error) {
+       // Note that col & error are new to the HTML 5 spec and may not be
+       // supported in every browser.  It worked for me in Chrome.
+       var extra = !col ? '' : '\ncolumn: ' + col;
+       extra += !error ? '' : '\nerror: ' + error;
+
+       // You can view the information in an alert to see things working like this:
+       alert("Error: " + msg + "\nurl: " + url + "\nline: " + line + extra);
+
+       // TODO: Report this error via ajax so you can keep track
+       //       of what pages have JS issues
+
+       var suppressErrorAlert = true;
+       // If you return true, then error alerts (like in older versions of
+       // Internet Explorer) will be suppressed.
+       return suppressErrorAlert;
+    };
+
+
+    activeDatePicker();
+    activeTimePicker();
+    //add more slots after click the Add
+    var $possibleSlots = $("#possible-slots");
+    var id = 1;
+
+    function makeNewSlotBlock() {
+      var content =
         `<div class="row form-block">
             <div class="input-field col s4">
               <label for="date${id}">Event Date</label>
-              <input id="date${id}" type="text" name="suggestions[${id}][slot_date]" class="datepicker">
+              <input id="date${id}" type="text" name="suggestions[${id}][slot_date]" class="datepicker" required>
             </div>
             <div class="input-field col s3">
               <label for="start${id}">Start Time</label>
-              <input id="start${id}" type="text" name="suggestions[${id}][slot_start]" class="timepicker">
+              <input id="start${id}" type="text" name="suggestions[${id}][slot_start]" class="timepicker" required>
             </div>
             <div class="input-field col s3">
               <label for="end${id}">End Time</label>
-              <input id="end${id}" type="text" name="suggestions[${id}][slot_end]" class="timepicker">
+              <input id="end${id}" type="text" name="suggestions[${id}][slot_end]" class="timepicker" required>
             </div>
             <div class="input-field col s2">
               <button class="deleteSlotsBtn" type="button">Delete</button>
             </div>
           </div>`
 
-        id ++;
+      id++;
 
-        return content;
-      }
+      return content;
+    }
 
-      $(".addMoreSlotsBtn").on("click", function () {
-        $possibleSlots.append(makeNewSlotBlock());
-        activeDatePicker();
-        activeTimePicker();
-        $(".deleteSlotsBtn").on("click", function (event) {
-          event.stopPropagation();
-          $(this).parent().parent().remove();
-        });
+    $(".addMoreSlotsBtn").on("click", function() {
+      $possibleSlots.append(makeNewSlotBlock());
+      activeDatePicker();
+      activeTimePicker();
+      $(".deleteSlotsBtn").on("click", function(event) {
+        event.stopPropagation();
+        $(this).parent().parent().remove();
       });
     });
+  });
+
   </script>
   </body>
+
 </html>
