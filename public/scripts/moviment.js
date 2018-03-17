@@ -1,8 +1,7 @@
 
 
 $(function() {
-    // alert("Hello! I am an alert box!!");
-
+ 
 var lFollowX = 0,
     lFollowY = 0,
     x = 0,
