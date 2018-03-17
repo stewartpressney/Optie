@@ -74,8 +74,6 @@ app.post('/create', async(req, res) => {
   }
 });
 
-
-//Attendance
 app.post('/vote', (req, res) => {
   
   const userCreation = knex('users').insert([{user_name: req.body.user_name, user_email:req.body.user_email}]);
