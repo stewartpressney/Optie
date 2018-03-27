@@ -9,6 +9,7 @@ const path = require('path');
 const app = express();
 const knexConfig = require("./knexfile");
 const knex = require("knex")(knexConfig[ENV]);
+console.log("knexconfig:", JSON.stringify(knexConfig[ENV]));
 const morgan = require('morgan');
 const knexLogger = require('knex-logger');
 // Seperated Routes for each Resource
@@ -78,8 +79,8 @@ app.post('/create', async(req, res) => {
 //Attendance
 app.post('/vote', (req, res) => {
 
-  
-  
+
+
   const userCreation = knex('users').insert([{user_name: req.body.user_name, user_email:req.body.user_email}]);
   userCreation.returning('id')
   .asCallback((err, [id]) => {
@@ -91,23 +92,23 @@ app.post('/vote', (req, res) => {
     .asCallback((err, [id]) => {
       const idFromEvent = id.id
 
-    
+
 
       const getIdSlot = knex.select('id').from('slots').where('event_id', idFromEvent);
       getIdSlot.then((result)=>{
-        
+
         for (var y = 0; y < req.body.checkbox.length; y++){
           var index = req.body.checkbox[y]
-          
+
           const idFromSlots =result[index].id;
           const insertAttendance = knex('attendance').insert([{slot_id: idFromSlots, user_id:idFromUser, available:true}]);
           insertAttendance.then((res)=>{
-            
+
           });
         }
 
       res.redirect('/events/' + urlFromEvent);
-        
+
 
       });
     });
@@ -135,8 +136,8 @@ app.get('/events/:id', async (req, res) => {
   const slots = await slotsPrms;
   const user = await userPrms;
 
-  
- 
+
+
 
   for (var z = 0; z < slots.length; z++){
     await knex('attendance').count('id')
@@ -148,7 +149,7 @@ app.get('/events/:id', async (req, res) => {
     });
   }
   res.render("event_detail", {event, slots, user, event_id: event_id});
-  
+
 });
 
 app.get('/json/events/:id', async (req, res) => {
@@ -161,8 +162,8 @@ app.get('/json/events/:id', async (req, res) => {
   const slots = await slotsPrms;
   const user = await userPrms;
 
-  
- 
+
+
 
   for (var z = 0; z < slots.length; z++){
     await knex('attendance').count('id')
@@ -174,7 +175,7 @@ app.get('/json/events/:id', async (req, res) => {
     });
   }
   res.json({event, slots, user, event_id: event_id});
-  
+
 });
 
 
