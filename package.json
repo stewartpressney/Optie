@@ -12,12 +12,12 @@
   "author": "Lighthouse Labs",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.15.2",
+    "body-parser": "^1.18.2",
     "dotenv": "^2.0.0",
-    "ejs": "^2.4.1",
-    "express": "^4.13.4",
+    "ejs": "^2.5.8",
+    "express": "^4.16.3",
     "jquery": "^3.3.1",
-    "knex": "^0.11.7",
+    "knex": "^0.11.10",
     "knex-logger": "^0.1.0",
     "materialize-clockpicker": "^1.0.1",
     "materialize-css": "^0.100.2",
@@ -27,7 +27,6 @@
     "pg": "^6.0.2"
   },
   "devDependencies": {
-    "nodemon": "^1.9.2",
-    "sqlite3": "^3.1.4"
+    "nodemon": "^1.9.2"
   }
 }
