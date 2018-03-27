@@ -70,8 +70,8 @@ app.post('/create', async(req, res) => {
 
     res.redirect('/events/' + event_url);
   } catch (ex) {
-    res.json({ error: ex.message });
-
+    console.error(ex);
+    res.status(500).send("Something went wrong.  Maybe it's our fault?  Please just try again, and/or be patient.");
   }
 });
 
